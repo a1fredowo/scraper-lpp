@@ -8,7 +8,7 @@ def get_top_anime(limit):
     page = 0
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
-    } # Encabezados para simular una solicitud de un navegador web y evitar ser bloqueado por el server
+    } # Headers para simular una solicitud de un navegador web y evitar ser bloqueado por el server
 
     while len(anime_list) < limit:
         url = f"https://myanimelist.net/topanime.php?limit={page * 50}"
@@ -71,7 +71,7 @@ def get_anime_details(url, headers):
         return {}
 
 def main():
-    limit = int(input("Cuántos animes quieres que se muestren: ")) # Número de animes a mostrar
+    limit = int(input("Seleccione el numero de animes a mostrar: ")) # Número de animes a mostrar
     top_anime = get_top_anime(limit) # Obtener la lista de los top animes
     if top_anime:
         print(json.dumps(top_anime, indent=4)) # Mostrar la lista de animes
