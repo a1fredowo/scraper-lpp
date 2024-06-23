@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import time
 
 def fetch_anime_page(page, headers):
+    # Obtiene el contenido HTML de la página de los mejores animes.
     url = f"https://myanimelist.net/topanime.php?limit={page * 50}"
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
@@ -13,6 +14,7 @@ def fetch_anime_page(page, headers):
         return None
 
 def parse_anime_list(soup, anime_list, limit, headers):
+    # Analiza la lista de animes utilizando la libreria BeautifulSoup.
     rows = soup.find_all('tr', class_='ranking-list')
     for row in rows:
         if len(anime_list) >= limit:
@@ -35,6 +37,7 @@ def parse_anime_list(soup, anime_list, limit, headers):
     return anime_list
 
 def get_anime_details(url, headers):
+    # Obtiene la información detallada para un anime específico.
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
         soup = BeautifulSoup(response.content, 'html.parser')
@@ -54,10 +57,11 @@ def get_anime_details(url, headers):
         return {}
 
 def get_top_anime(limit):
+    # Obtiene los mejores animes de MyAnimeList hasta el límite especificado.
     anime_list = []
     page = 0
     headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, como Gecko) Chrome/58.0.3029.110 Safari/537.3"
     }
 
     while len(anime_list) < limit:

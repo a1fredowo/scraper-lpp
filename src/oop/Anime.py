@@ -1,5 +1,7 @@
 class Anime:
+    # Clase que representa un anime.
     def __init__(self, rank, title, score, genres, aired, episodes):
+        # Inicializamos un objeto Anime con los datos proporcionados.
         self._rank = rank
         self._title = title
         self._score = float(score)
@@ -7,6 +9,7 @@ class Anime:
         self._aired = aired
         self._episodes = int(episodes) if episodes.isdigit() else None
 
+    # Setters y Getters
     @property
     def rank(self):
         return self._rank
@@ -31,5 +34,5 @@ class Anime:
     def episodes(self):
         return self._episodes
 
-    def __str__(self):
-        return f"Anime(title={self._title}, score={self._score}, genres={self._genres}, aired={self._aired}, episodes={self._episodes})"
+    def __repr__(self):
+        return f"Anime(rank={self._rank}, title='{self._title}', score={self._score}, genres={self._genres}, aired='{self._aired}', episodes={self._episodes})"
