@@ -9,7 +9,7 @@ class Anime:
         self._aired = aired
         self._episodes = int(episodes) if episodes.isdigit() else None
 
-    # Setters y Getters
+    # Getters
     @property
     def rank(self):
         return self._rank

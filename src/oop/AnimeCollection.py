@@ -1,6 +1,5 @@
 from collections import defaultdict
 from itertools import combinations
-from .Anime import Anime
 
 class AnimeCollection:
     def __init__(self):

@@ -14,7 +14,7 @@ def fetch_anime_page(page, headers):
         return None
 
 def parse_anime_list(soup, anime_list, limit, headers):
-    # Analiza la lista de animes utilizando la libreria BeautifulSoup.
+    # Analiza la lista de animes.
     rows = soup.find_all('tr', class_='ranking-list')
     for row in rows:
         if len(anime_list) >= limit:
@@ -22,9 +22,11 @@ def parse_anime_list(soup, anime_list, limit, headers):
         title = row.find('h3', class_='anime_ranking_h3').text.strip()
         score = row.find('span', class_='score-label').text.strip()
         
+        # Obtiene el enlace para los detalles del anime.
         link = row.find('a', class_='hoverinfo_trigger fl-l ml12 mr8')['href']
         anime_details = get_anime_details(link, headers)
         
+        # Guarda la información del anime en un diccionario.
         anime_info = {
             'rank': len(anime_list) + 1,
             'title': title,
@@ -37,11 +39,12 @@ def parse_anime_list(soup, anime_list, limit, headers):
     return anime_list
 
 def get_anime_details(url, headers):
-    # Obtiene la información detallada para un anime específico.
+    # Obtiene la información detallada de un anime específico.
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
         soup = BeautifulSoup(response.content, 'html.parser')
         
+        # Extrae géneros, fechas de emisión y número de episodios.
         genres = [genre.text for genre in soup.find_all('span', itemprop='genre')]
         aired = soup.find('span', class_='information season').text.strip() if soup.find('span', class_='information season') else 'N/A'
         episodes_tag = soup.find('span', string='Episodes:')
@@ -57,7 +60,7 @@ def get_anime_details(url, headers):
         return {}
 
 def get_top_anime(limit):
-    # Obtiene los mejores animes de MyAnimeList hasta el límite especificado.
+    # Obtiene los mejores animes hasta el límite especificado.
     anime_list = []
     page = 0
     headers = {
@@ -71,6 +74,6 @@ def get_top_anime(limit):
         else:
             break
         page += 1
-        time.sleep(1)
+        time.sleep(1)  # Espera entre solicitudes para evitar ser bloqueado.
 
     return anime_list
