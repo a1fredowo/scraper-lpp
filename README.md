@@ -1,5 +1,5 @@
-Proyecto LPP - Web Scraping  
-Grupo 7  
+# Proyecto LPP - Web Scraping  
+
 Integrantes:   
 Alfredo Hernández  
 Valentina Manríquez  
